@@ -1,0 +1,57 @@
+{% extends "layout.html" %}
+
+{% block title %}
+AI Chat
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <h2>🤖 AI Chat with Dataset</h2>
+
+    <div class="card shadow">
+
+        <div class="card-body">
+
+            <form method="POST">
+
+                <textarea
+                    name="question"
+                    class="form-control"
+                    rows="4"
+                    placeholder="Example: Which column has the highest missing values?"
+                    required
+                ></textarea>
+
+                <button
+                    class="btn btn-primary mt-3"
+                    type="submit">
+
+                    Ask AI
+
+                </button>
+
+            </form>
+
+            <hr>
+
+            <h4>AI Response</h4>
+
+            {% if response %}
+
+            <div class="alert alert-success">
+
+                {{ response }}
+
+            </div>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

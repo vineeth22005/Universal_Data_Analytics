@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Upload Dataset
+{% endblock %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+
+    <div class="col-md-8">
+
+        <div class="card shadow">
+
+            <div class="card-header bg-success text-white">
+                <h3>📂 Upload Dataset</h3>
+            </div>
+
+            <div class="card-body">
+
+                <form method="POST" enctype="multipart/form-data">
+
+                    <div class="mb-3">
+                        <label class="form-label">
+                            Select CSV or Excel File
+                        </label>
+
+                        <input
+                            type="file"
+                            class="form-control"
+                            name="file"
+                            accept=".csv,.xlsx,.xls"
+                            required>
+                    </div>
+
+                    <button
+                        type="submit"
+                        class="btn btn-success">
+
+                        Upload Dataset
+
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

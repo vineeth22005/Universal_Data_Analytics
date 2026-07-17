@@ -1,0 +1,130 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Chart Builder
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <div class="card shadow">
+
+        <div class="card-header bg-primary text-white">
+            <h3>📊 Interactive Chart Builder</h3>
+        </div>
+
+        <div class="card-body">
+
+            <form method="POST">
+
+                <div class="mb-3">
+                    <label class="form-label">X Axis</label>
+                    <select name="x_column" class="form-select">
+                        {% for col in categorical_columns %}
+                        <option value="{{ col }}">{{ col }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Y Axis</label>
+                    <select name="y_column" class="form-select">
+                        {% for col in numeric_columns %}
+                        <option value="{{ col }}">{{ col }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Chart Type</label>
+
+                    <select name="chart_type" class="form-select">
+
+                        <option value="Auto" selected>
+                            🤖 Auto Recommend
+                        </option>
+
+                        <option value="Bar">📊 Bar Chart</option>
+                        <option value="Line">📈 Line Chart</option>
+                        <option value="Scatter">🔵 Scatter Plot</option>
+                        <option value="Histogram">📉 Histogram</option>
+                        <option value="Pie">🥧 Pie Chart</option>
+                        <option value="Box">📦 Box Plot</option>
+                        <option value="Area">📈 Area Chart</option>
+                        <option value="Heatmap">🔥 Correlation Heatmap</option>
+
+                    </select>
+
+                </div>
+
+                <button type="submit" class="btn btn-success btn-lg">
+                    📊 Generate Chart
+                </button>
+
+            </form>
+
+            {% if chart_html %}
+
+            <div class="alert alert-success mt-4">
+
+                🤖 Recommended / Selected Chart:
+                <strong>{{ request.form.get('chart_type', 'Auto') }}</strong>
+
+            </div>
+
+            <hr>
+
+            <h4 class="mt-4">
+                📊 Generated Chart
+            </h4>
+
+            <div class="mt-3">
+
+                {{ chart_html|safe }}
+
+            </div>
+
+            <div class="mt-3">
+
+                <button
+                    type="button"
+                    class="btn btn-primary"
+                    onclick="downloadChart()">
+
+                    📥 Download Chart as PNG
+
+                </button>
+
+            </div>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+function downloadChart() {
+
+    let plot = document.querySelector(".js-plotly-plot");
+
+    if (plot) {
+
+        Plotly.downloadImage(plot, {
+            format: "png",
+            filename: "analytics_chart",
+            width: 1200,
+            height: 700
+        });
+
+    }
+
+}
+
+</script>
+
+{% endblock %}

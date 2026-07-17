@@ -1,0 +1,66 @@
+{% extends "layout.html" %}
+
+{% block title %}
+AI Chat with Dataset
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <div class="card shadow">
+
+        <div class="card-header bg-primary text-white">
+
+            <h3>💬 Chat with Your Dataset</h3>
+
+        </div>
+
+        <div class="card-body">
+
+            <form method="POST">
+
+                <label class="form-label">
+                    Ask a question
+                </label>
+
+                <input
+                    type="text"
+                    name="question"
+                    class="form-control"
+                    placeholder="Example: How many rows are there?"
+                    required>
+
+                <br>
+
+                <button class="btn btn-success">
+
+                    Ask AI
+
+                </button>
+
+            </form>
+
+            {% if answer %}
+
+            <hr>
+
+            <div class="alert alert-info">
+
+                <strong>🤖 AI Answer:</strong>
+
+                <br><br>
+
+                {{ answer }}
+
+            </div>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

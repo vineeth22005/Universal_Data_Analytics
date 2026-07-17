@@ -1,0 +1,86 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Profile
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <div class="card shadow-lg border-0">
+
+        <div class="card-header bg-primary text-white text-center">
+
+            <h2>👤 User Profile</h2>
+
+        </div>
+
+        <div class="card-body text-center">
+
+            <img src="https://ui-avatars.com/api/?name={{ name }}&background=0D6EFD&color=fff&size=150"
+                 class="rounded-circle mb-4"
+                 alt="Profile">
+
+            <h3>{{ name }}</h3>
+
+            <p class="text-muted">{{ email }}</p>
+
+            <hr>
+
+            <div class="row">
+
+                <div class="col-md-6">
+
+                    <div class="card border-success">
+
+                        <div class="card-body">
+
+                            <h5>📂 Uploaded Dataset</h5>
+
+                            <p>
+                                {{ session.get("uploaded_filename","No File Uploaded") }}
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-6">
+
+                    <div class="card border-primary">
+
+                        <div class="card-body">
+
+                            <h5>📊 Total Rows</h5>
+
+                            <p>{{ session.get("rows",0) }}</p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="mt-4">
+
+                <a href="{{ url_for('dashboard.dashboard') }}"
+                   class="btn btn-primary">
+
+                    🏠 Back to Dashboard
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

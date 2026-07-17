@@ -1,0 +1,1132 @@
+/* ===========================================
+   Universal Data Analytics - Professional Theme
+=========================================== */
+
+/* Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* ===========================
+   Theme Colors
+=========================== */
+
+:root{
+
+    --primary:#003B7A;
+
+    --primary-dark:#002A56;
+
+    --primary-light:#DBEAFE;
+
+    --background:#F5F7FA;
+
+    --card:#FFFFFF;
+
+    --text:#1F2937;
+
+    --text-light:#6B7280;
+
+    --border:#D1D5DB;
+
+    --success:#16A34A;
+
+    --shadow:0 4px 12px rgba(0,0,0,.05);
+
+    --radius:10px;
+
+}
+
+/* ===========================
+   Global
+=========================== */
+
+*{
+
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+
+}
+
+body{
+
+    background:var(--background);
+
+    color:var(--text);
+
+    font-size:15px;
+
+}
+
+.container,
+.container-fluid{
+
+    padding-top:25px;
+
+}
+
+/* ===========================
+   Navbar
+=========================== */
+
+.navbar{
+
+    background:#FFFFFF !important;
+
+    border-bottom:2px solid #E5E7EB;
+
+    padding:18px 35px;
+
+    box-shadow:none;
+
+}
+
+.navbar-brand{
+
+    font-size:1.7rem;
+
+    font-weight:700;
+
+    color:var(--primary) !important;
+
+}
+
+.navbar-brand i{
+
+    margin-right:8px;
+
+}
+
+.navbar .nav-link{
+
+    color:#374151 !important;
+
+    font-weight:500;
+
+    margin-left:20px;
+
+    transition:.3s;
+
+}
+
+.navbar .nav-link:hover{
+
+    color:var(--primary) !important;
+
+}
+
+.navbar .nav-link.active{
+
+    color:var(--primary) !important;
+
+    font-weight:600;
+
+}
+
+/* ===========================
+   Cards
+=========================== */
+
+.card{
+
+    background:var(--card);
+
+    border:1px solid var(--border);
+
+    border-radius:var(--radius);
+
+    transition:.3s;
+
+}
+
+.card:hover{
+
+    transform:translateY(-5px);
+
+}
+
+.card-header{
+
+    background:#1E293B;
+
+    border-bottom:1px solid var(--border);
+
+    border-radius:18px 18px 0 0 !important;
+
+    font-weight:600;
+
+    color:var(--text);
+
+    font-size:18px;
+
+}
+
+/* ===========================
+   KPI Cards
+=========================== */
+
+.kpi-card{
+
+    background:#003B7A !important;
+
+    color:white !important;
+
+    border:none !important;
+
+    border-radius:15px;
+
+    height:140px;
+
+}
+
+
+
+.kpi-card:hover{
+
+    border-color:var(--primary);
+
+}
+
+.kpi-card .card-body{
+
+    text-align:center;
+
+    padding:10px;
+
+}
+
+
+
+/* ===========================
+   Buttons
+=========================== */
+
+.btn{
+
+    border-radius:12px;
+
+    font-weight:500;
+
+    padding:10px 22px;
+
+}
+
+.btn-primary{
+
+    background:var(--primary);
+
+    border:none;
+
+}
+
+.btn-primary:hover{
+
+    background:var(--primary-dark);
+
+}
+
+.btn-success,
+.btn-warning,
+.btn-danger,
+.btn-info{
+
+    background:var(--primary);
+
+    border:none;
+
+    color:white;
+
+}
+
+.btn-success:hover,
+.btn-warning:hover,
+.btn-danger:hover,
+.btn-info:hover{
+
+    background:var(--primary-dark);
+
+}
+
+/* ===========================
+   Table
+=========================== */
+
+.table{
+
+    border-radius:10px;
+
+    overflow:hidden;
+
+    background:white;
+
+    border:1px solid #E5E7EB;
+
+}
+
+.table thead{
+
+    background:#003B7A !important;
+
+    color:white !important;
+
+}
+
+.table thead th{
+
+    background:#003B7A !important;
+
+    color:white !important;
+
+    font-size:16px;
+
+    font-weight:600;
+
+    padding:15px;
+
+}
+
+.table tbody td{
+
+    padding:14px;
+
+    color:#1F2937;
+
+    white-space:nowrap;
+
+}
+
+.table tbody tr:hover{
+
+    background:#F8FAFC;
+
+}
+
+/* ===========================
+   Progress
+=========================== */
+
+.progress{
+
+    height:10px;
+
+    border-radius:20px;
+
+    background:#E5E7EB;
+
+}
+
+.progress-bar{
+
+    background:var(--primary);
+
+    border-radius:20px;
+
+}
+
+/* ===========================
+   Form Controls
+=========================== */
+
+.form-control,
+.form-select{
+
+    border-radius:10px;
+
+    border:1px solid var(--border);
+
+}
+
+.form-control:focus,
+.form-select:focus{
+
+    border-color:var(--primary);
+
+    box-shadow:0 0 0 .15rem rgba(37,99,235,.15);
+
+}
+
+/* ===========================
+   Footer
+=========================== */
+
+footer{
+
+    margin-top:40px;
+
+    padding:20px;
+
+    text-align:center;
+
+    color:var(--text-light);
+
+}
+
+/* Quick Action Cards */
+
+.action-card{
+
+    display:block;
+
+    background:#003B7A;
+
+    border-radius:10px;
+
+    padding:25px;
+
+    text-align:center;
+
+    text-decoration:none !important;
+
+    min-height:180px;
+
+    cursor:pointer;
+
+    color:white !important;
+
+    transition:0.3s;
+
+}
+
+.action-card:hover{
+
+    background:#002A56;
+
+    transform:translateY(-5px);
+
+}
+
+.action-card *{
+
+    color:white !important;
+
+}
+
+.action-card i{
+
+    font-size:40px;
+
+    color:white !important;
+
+    margin-bottom:15px;
+
+}
+
+.action-card h5{
+
+    color:white !important;
+
+    font-size:18px;
+
+    font-weight:600;
+
+    margin-bottom:10px;
+
+}
+
+.action-card p{
+
+    color:white !important;
+
+    font-size:14px;
+
+    margin:0;
+
+}
+
+.table-responsive{
+
+    border-radius:15px;
+
+}
+
+.table thead{
+
+    background:#2563EB;
+
+    color:white;
+
+}
+
+.table thead th{
+
+    padding:15px;
+
+    white-space:nowrap;
+
+}
+
+.table tbody td{
+
+    padding:12px;
+
+    white-space:nowrap;
+
+}
+
+.table tbody tr:hover{
+
+    background:#F1F5F9;
+
+}
+
+/* Analytics Overview */
+
+.info-card{
+
+    background:#003B7A;
+
+    color:white !important;
+
+    border-radius:10px;
+
+    padding:25px;
+
+}
+
+.info-card h4{
+
+    color:white !important;
+
+    font-size:24px;
+
+}
+
+.info-card h6{
+
+    color:white !important;
+
+    font-size:16px;
+
+}
+
+.info-card i{
+
+    color:white !important;
+
+}
+
+.info-card:hover{
+
+    transform:translateY(-6px);
+
+}
+
+.info-card i{
+
+    font-size:40px;
+
+    color:var(--primary);
+
+    margin-bottom:15px;
+
+}
+
+.info-card h6{
+
+    color:var(--text-light);
+
+    margin-top:10px;
+
+}
+
+.info-card h4{
+
+    font-weight:700;
+
+    margin-top:10px;
+
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span,
+small,
+label,
+td,
+th,
+li {
+
+    color: white !important;
+
+}
+
+.text-dark {
+
+    color: white !important;
+
+}
+
+.text-muted {
+
+    color: #CBD5E1 !important;
+
+}
+
+/* KPI Cards */
+
+.kpi-card h2,
+.kpi-card h5,
+.kpi-card p {
+
+    color: white !important;
+
+}
+
+/* Info Cards */
+
+.info-card h4,
+.info-card h6,
+.info-card p {
+
+    color: white !important;
+
+}
+
+/* Tables */
+
+.table td,
+.table th {
+
+    color: white !important;
+
+}
+
+/* Table Hover */
+
+.table tbody tr:hover {
+
+    background-color: #334155 !important;
+
+}
+
+/* Card Header */
+
+.card-header {
+
+    color: white !important;
+
+}
+
+/* Card Body */
+
+.card-body {
+
+    color: white !important;
+
+}
+
+.table-responsive{
+
+    border-radius:10px;
+
+    border:1px solid #E5E7EB;
+
+    overflow:hidden;
+
+}
+
+/* Global Font Fix */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6{
+    color:#1F2937 !important;
+}
+
+p,
+span,
+label,
+small,
+li{
+    color:#374151 !important;
+}
+
+/* KPI Cards */
+
+.kpi-card h2{
+    color:#003B7A !important;
+}
+
+.kpi-card h5{
+    color:#374151 !important;
+}
+
+/* Tables */
+
+.table td{
+    color:#1F2937 !important;
+}
+
+.table th{
+    color:white !important;
+}
+
+/* Card Headers */
+
+.card-header{
+    color:#1F2937 !important;
+}
+
+/* Info Cards */
+
+.info-card h4{
+    color:#003B7A !important;
+}
+
+.info-card h6{
+    color:#374151 !important;
+}
+
+/* Global Font Improvements */
+
+body{
+    font-size:18px;
+}
+
+/* All Headings */
+
+h1,h2,h3,h4,h5,h6{
+    color:#1F2937 !important;
+    font-weight:600;
+}
+
+/* All Paragraphs */
+
+p,span,small,label,li{
+    color:#374151 !important;
+    font-size:16px;
+}
+
+/* KPI Cards */
+
+.kpi-card h2{
+    color:#003B7A !important;
+    font-size:42px !important;
+}
+
+.kpi-card h5{
+    color:#1F2937 !important;
+    font-size:18px !important;
+}
+
+/* Tables */
+
+.table td{
+    color:#1F2937 !important;
+    font-size:15px !important;
+}
+
+.table th{
+    color:white !important;
+    font-size:16px !important;
+}
+
+/* Card Header */
+
+.card-header{
+    color:white !important;
+    font-size:18px !important;
+}
+
+/* Info Cards */
+
+.info-card h4{
+    color:#003B7A !important;
+}
+
+.info-card h6{
+    color:#1F2937 !important;
+}
+
+/* Analytics Summary */
+
+.alert,
+.badge{
+    font-size:15px;
+}
+
+/* UNIVERSAL FONT FIX */
+
+body{
+    font-size:18px;
+}
+
+/* All Tables */
+
+.table td{
+    color:#111827 !important;
+    font-size:16px !important;
+    font-weight:500;
+}
+
+.table th{
+    color:white !important;
+    font-size:17px !important;
+    font-weight:600;
+}
+
+/* Card Headers */
+
+.card-header{
+
+    font-size:20px !important;
+    font-weight:600;
+
+}
+
+/* KPI Cards */
+
+.kpi-card h2{
+
+    font-size:40px !important;
+    color:#003B7A !important;
+
+}
+
+.kpi-card h5{
+
+    font-size:18px !important;
+    color:#1F2937 !important;
+
+}
+
+/* Analytics Summary */
+
+.card-body{
+
+    color:#1F2937 !important;
+    font-size:16px;
+
+}
+
+/* Search Box */
+
+.form-control{
+
+    font-size:16px !important;
+
+}
+
+/* Dashboard Width */
+
+.container{
+
+    max-width:95% !important;
+
+}
+
+/* Recent Activity */
+
+li,
+span,
+small,
+p{
+
+    font-size:16px !important;
+    color:#374151 !important;
+
+}
+
+/* Recent Activity */
+
+.card-body table td,
+.card-body table th{
+
+    color:#1F2937 !important;
+
+    font-size:16px !important;
+
+}
+
+/* Analytics Overview */
+
+.info-card{
+
+    color:#1F2937 !important;
+
+}
+
+.info-card h4{
+
+    color:#003B7A !important;
+
+    font-size:24px !important;
+
+}
+
+.info-card h6{
+
+    color:#1F2937 !important;
+
+    font-size:16px !important;
+
+}
+
+/* Dataset Overview */
+
+#dataset-overview,
+#dataset-overview *{
+
+    color:#1F2937 !important;
+
+}
+
+/* Dataset Statistics Chart */
+
+#dataset-chart,
+#dataset-chart *{
+
+    color:#1F2937 !important;
+
+}
+
+/* Plotly Text */
+
+.js-plotly-plot .plotly text{
+
+    fill:#1F2937 !important;
+
+    font-size:14px !important;
+
+}
+
+/* All Card Bodies */
+
+.card-body{
+
+    color:#1F2937 !important;
+
+}
+
+/* Force Text Visibility */
+
+.card *{
+
+    color:inherit;
+
+}
+
+.welcome-text{
+
+    color:#1F2937 !important;
+
+    font-size:16px;
+
+    font-weight:500;
+
+}
+
+.card-header{
+
+    background:#003B7A !important;
+
+    color:white !important;
+
+    font-size:18px;
+
+    font-weight:600;
+
+}
+
+/* All Section Headers */
+
+.card-header{
+
+    background:#003B7A !important;
+
+    color:white !important;
+
+    font-size:18px;
+
+    font-weight:600;
+
+}
+
+/* Table Headers */
+
+.table thead th{
+
+    background:#003B7A !important;
+
+    color:white !important;
+
+    font-size:16px;
+
+    font-weight:600;
+
+    padding:15px;
+
+}
+
+.card-header *{
+    color:white !important;
+}
+
+.table thead th *{
+    color:white !important;
+}
+
+/* Analytics Overview */
+
+.info-card{
+
+    background:#003B7A !important;
+
+    border-radius:10px;
+
+    color:white !important;
+
+}
+
+.info-card i{
+
+    color:white !important;
+
+    font-size:36px;
+
+}
+
+.info-card h4{
+
+    color:white !important;
+
+    font-size:24px;
+
+    font-weight:700;
+
+}
+
+.info-card h6{
+
+    color:white !important;
+
+    font-size:16px;
+
+    font-weight:500;
+
+}
+
+/* ===========================
+   SIDEBAR
+=========================== */
+
+.sidebar{
+
+    width:250px;
+    height:100vh;
+
+    background:#003B7A;
+
+    position:fixed;
+    top:0;
+    left:0;
+
+    padding:30px 20px;
+
+    overflow-y:auto;
+
+}
+
+.sidebar h3{
+
+    color:white;
+    text-align:center;
+
+    margin-bottom:40px;
+
+    font-size:28px;
+    font-weight:700;
+
+}
+
+.sidebar a{
+
+    display:block;
+
+    color:white;
+
+    text-decoration:none;
+
+    padding:12px 15px;
+
+    margin-bottom:10px;
+
+    border-radius:8px;
+
+    transition:0.3s;
+
+    font-size:16px;
+
+}
+
+.sidebar a:hover{
+
+    background:#002A56;
+
+    transform:translateX(5px);
+
+}
+
+/* ===========================
+   MAIN CONTENT
+=========================== */
+
+.main-content{
+
+    margin-left:260px;
+
+    width:100%;
+
+    padding:20px;
+
+}
+
+.sidebar i{
+
+    margin-right:10px;
+
+}
+
+.hero-text{
+
+    color:#BFDBFE;
+    font-size:18px;
+    font-weight:500;
+
+}
+
+.kpi-card h2{
+
+    color:white !important;
+
+    font-size:28px !important;
+
+    font-weight:700;
+
+}
+
+.kpi-card h5{
+
+    color:white !important;
+
+    font-size:16px !important;
+
+    font-weight:600;
+
+}
+
+.kpi-card i{
+
+    color:#BFDBFE !important;
+
+    font-size:30px;
+
+}

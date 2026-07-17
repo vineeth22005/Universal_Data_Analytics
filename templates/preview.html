@@ -1,0 +1,148 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Dataset Preview
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+
+    <div class="card shadow">
+
+        <div class="card-header bg-success text-white">
+            <h3>📊 Dataset Preview</h3>
+        </div>
+
+        <div class="card-body">
+
+            <div class="alert alert-info">
+
+                <h5>Dataset Information</h5>
+
+                <p><strong>File Name:</strong> {{ filename }}</p>
+
+                <p><strong>Total Rows:</strong> {{ rows }}</p>
+
+                <p><strong>Total Columns:</strong> {{ columns }}</p>
+
+                <p><strong>Duplicate Rows:</strong> {{ duplicate_rows }}</p>
+
+            </div>
+
+            <hr>
+
+            <h4>📋 Column Names</h4>
+
+            <ul class="list-group mb-4">
+
+                {% for column in column_names %}
+
+                <li class="list-group-item">
+                    {{ column }}
+                </li>
+
+                {% endfor %}
+
+            </ul>
+
+            <h4>🔢 Data Types</h4>
+
+            <div class="table-responsive">
+
+                <table class="table table-bordered table-striped">
+
+                    <thead class="table-dark">
+
+                        <tr>
+                            <th>Column</th>
+                            <th>Data Type</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        {% for column, dtype in data_types.items() %}
+
+                        <tr>
+
+                            <td>{{ column }}</td>
+
+                            <td>{{ dtype }}</td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            <h4>❌ Missing Values</h4>
+
+            <div class="table-responsive">
+
+                <table class="table table-bordered table-striped">
+
+                    <thead class="table-danger">
+
+                        <tr>
+
+                            <th>Column</th>
+
+                            <th>Missing Values</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        {% for column, count in missing_values.items() %}
+
+                        <tr>
+
+                            <td>{{ column }}</td>
+
+                            <td>{{ count }}</td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            <hr>
+
+            <h4>📄 First 10 Rows</h4>
+
+            <div class="table-responsive">
+
+                {{ preview | safe }}
+
+            </div>
+
+            <br>
+
+            <a href="{{ url_for('upload.upload') }}" class="btn btn-success">
+                📂 Upload Another Dataset
+            </a>
+
+            <a href="{{ url_for('dashboard.dashboard') }}" class="btn btn-secondary">
+                🏠 Back to Dashboard
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+
+{% block title %}
+AI Recommendations
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <div class="card shadow">
+
+        <div class="card-header bg-primary text-white">
+
+            <h3>🤖 AI Recommendations</h3>
+
+        </div>
+
+        <div class="card-body">
+
+            <ul class="list-group">
+
+                {% for item in recommendations %}
+
+                <li class="list-group-item">
+
+                    {{ item }}
+
+                </li>
+
+                {% endfor %}
+
+            </ul>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

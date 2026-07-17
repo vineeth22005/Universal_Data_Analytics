@@ -1,0 +1,163 @@
+{% extends "layout.html" %}
+
+{% block title %}
+AI Prediction
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <div class="card shadow">
+
+        <div class="card-header bg-primary text-white">
+            <h2>🤖 AI Prediction Module</h2>
+        </div>
+
+        <div class="card-body">
+
+            <div class="alert alert-info">
+
+    <h5>📂 Current Dataset</h5>
+
+    <p class="mb-0">
+
+        <strong>
+    {{ uploaded_filename if uploaded_filename else "No Dataset Uploaded" }}
+</strong>
+
+    </p>
+
+</div>
+
+
+
+            <form method="POST">
+
+    <input type="hidden" name="train_model" value="1">
+
+    <div class="mt-3">
+
+        <label class="form-label">
+            Select Target Column
+        </label>
+
+        <select
+            name="target"
+            class="form-select">
+
+            {% for col in columns %}
+
+            <option value="{{ col }}">
+                {{ col }}
+            </option>
+
+            {% endfor %}
+
+        </select>
+
+    </div>
+
+    <button
+        type="submit"
+        class="btn btn-success mt-3">
+
+        🤖 Train Model
+
+    </button>
+
+</form>
+
+            {% if accuracy %}
+
+<div class="alert alert-success mt-4">
+
+    <h4>🎉 Model Trained Successfully!</h4>
+
+    <p>
+        Target Column:
+        <strong>{{ target }}</strong>
+    </p>
+
+    <p>
+        Accuracy:
+        <strong>{{ accuracy }}%</strong>
+    </p>
+
+</div>
+
+{% if graph_html %}
+
+<div class="card mt-4">
+
+    <div class="card-header">
+        <h4>📈 Actual vs Predicted Chart</h4>
+    </div>
+
+    <div class="card-body">
+        {{ graph_html|safe }}
+    </div>
+
+</div>
+
+{% endif %}
+
+
+{% if scatter_html %}
+
+<div class="card mt-4">
+
+    <div class="card-header">
+        <h4>📌 Scatter Plot</h4>
+    </div>
+
+    <div class="card-body">
+        {{ scatter_html|safe }}
+    </div>
+
+</div>
+
+{% endif %}
+
+
+{% if histogram_html %}
+
+<div class="card mt-4">
+
+    <div class="card-header">
+        <h4>📊 Histogram</h4>
+    </div>
+
+    <div class="card-body">
+        {{ histogram_html|safe }}
+    </div>
+
+</div>
+
+{% endif %}
+
+            {% if bar_html %}
+
+<div class="card mt-4">
+
+    <div class="card-header">
+        <h4>📊 Bar Chart</h4>
+    </div>
+
+    <div class="card-body">
+        {{ bar_html|safe }}
+    </div>
+
+</div>
+
+{% endif %}
+
+{% endif %}
+
+</div>
+
+</div>
+
+</div>
+
+{% endblock %}

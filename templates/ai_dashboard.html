@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+
+{% block title %}
+AI Dashboard
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <h2>🤖 AI Dashboard</h2>
+
+        <a href="{{ url_for('charts.charts') }}"
+           class="btn btn-outline-primary">
+
+            ← Back to Charts
+
+        </a>
+
+    </div>
+
+    {% if charts %}
+
+        {% for chart in charts %}
+
+            <div class="card shadow-sm mb-4">
+
+                <div class="card-body">
+
+                    {{ chart|safe }}
+
+                </div>
+
+            </div>
+
+        {% endfor %}
+
+    {% else %}
+
+        <div class="alert alert-warning">
+
+            No charts could be generated.
+
+        </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}
