@@ -23,6 +23,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import r2_score
 from routes.chat_with_dataset import chat_dataset_bp
+import os
 
 app = Flask(__name__)
 
@@ -60,5 +61,8 @@ def home():
     return render_template("index.html")
 
 
-if __name__ == "__main__": 
-    app.run(debug=True)
+if __name__ == "__main__":
+    app.run(
+        host="0.0.0.0",
+        port=int(os.environ.get("PORT", 5000))
+    )
