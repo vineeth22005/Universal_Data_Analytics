@@ -21,7 +21,13 @@ def download_report():
     else:
         df = pd.read_excel(filepath)
 
-    pdf_path = generate_pdf(df)
+    pdf_path = generate_pdf(
+    df,
+    session.get(
+        "uploaded_filename",
+        "Unknown Dataset"
+    )
+)
 
     return send_file(pdf_path, as_attachment=True)
 

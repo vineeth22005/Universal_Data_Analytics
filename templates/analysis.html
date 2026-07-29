@@ -16,9 +16,9 @@ Dataset Analysis
 
         <div class="card-body">
 
-            <p class="text-muted">
-                Statistical summary of your uploaded dataset.
-            </p>
+            <p class="summary-text">
+    Statistical summary of your uploaded dataset.
+</p>
 
             <div class="table-responsive">
                 {{ summary | safe }}
@@ -30,9 +30,9 @@ Dataset Analysis
                 📂 Upload Another Dataset
             </a>
 
-            <a href="{{ url_for('dashboard.dashboard') }}" class="btn btn-secondary">
-                🏠 Dashboard
-            </a>
+            <a href="{{ url_for('dashboard.dashboard') }}" class="btn btn-primary">
+    🏠 Dashboard
+</a>
 
         </div>
 

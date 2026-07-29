@@ -12,19 +12,45 @@ Profile
 
         <div class="card-header bg-primary text-white text-center">
 
-            <h2>👤 User Profile</h2>
+            <h2 class="fw-bold">Profile Overview</h2>
+            <p class="mb-0">Universal Data Analytics</p>
 
         </div>
 
         <div class="card-body text-center">
 
-            <img src="https://ui-avatars.com/api/?name={{ name }}&background=0D6EFD&color=fff&size=150"
-                 class="rounded-circle mb-4"
-                 alt="Profile">
+            <img src="{% if session.get('profile_image') %}
+{{ url_for('static', filename='profile_images/' + session.get('profile_image')) }}
+{% else %}
+https://ui-avatars.com/api/?name={{ name }}&background=0D6EFD&color=fff&size=150
+{% endif %}"
+class="rounded-circle mb-4 border border-3 border-primary"
+width="150"
+height="150">
 
-            <h3>{{ name }}</h3>
+            <h2 class="fw-bold mt-3">{{ name }}</h2>
 
-            <p class="text-muted">{{ email }}</p>
+<p class="text-muted">
+    {{ email }}
+</p>
+
+<small class="badge bg-success">
+    Active User
+</small>
+
+            <form action="{{ url_for('profile.upload_profile_image') }}"
+      method="POST"
+      enctype="multipart/form-data">
+
+    <input type="file"
+           name="profile_image"
+           class="form-control mt-3">
+
+    <button class="btn btn-primary mt-2">
+        Upload Image
+    </button>
+
+</form>
 
             <hr>
 
@@ -36,11 +62,14 @@ Profile
 
                         <div class="card-body">
 
-                            <h5>📂 Uploaded Dataset</h5>
+                           <h5 class="fw-bold">
+    <i class="bi bi-database-fill"></i>
+    Dataset
+</h5>
 
-                            <p>
-                                {{ session.get("uploaded_filename","No File Uploaded") }}
-                            </p>
+<p class="mt-3 fs-5">
+    {{ session.get("uploaded_filename","No File Uploaded") }}
+</p>
 
                         </div>
 
@@ -52,13 +81,38 @@ Profile
 
                     <div class="card border-primary">
 
-                        <div class="card-body">
+                       <div class="card-body">
 
-                            <h5>📊 Total Rows</h5>
+    <div class="mb-4">
 
-                            <p>{{ session.get("rows",0) }}</p>
+        <h5 class="fw-bold">
+            <i class="bi bi-table"></i>
+            Total Rows
+        </h5>
 
-                        </div>
+        <h2 class="text-primary">
+            {{ total_rows }}
+        </h2>
+
+    </div>
+
+    <hr>
+
+    <div>
+
+        <h5 class="fw-bold">
+            <i class="bi bi-columns-gap"></i>
+            Total Columns
+        </h5>
+
+        <h2 class="text-info">
+            {{ total_columns }}
+
+        </h2>
+
+    </div>
+
+</div>
 
                     </div>
 
@@ -77,10 +131,94 @@ Profile
 
             </div>
 
+            <hr>
+
+<div class="row mt-4">
+
+    <div class="col-md-4">
+
+        <div class="card shadow-lg rounded-4 stats-card">
+
+            <div class="card-body text-center">
+
+                <h6 class="text-white">
+    Datasets Uploaded
+</h6>
+
+<h3 class="text-white">
+    {{ session.get("upload_history", [])|length }}
+</h3>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-4">
+
+        <div class="card shadow-sm border rounded-4 stats-card">
+
+            <div class="card-body text-center">
+
+                <h6 class="text-white">
+    Charts Generated
+</h6>
+
+<h3 class="text-white">
+    25+
+</h3>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-4">
+
+        <div class="card shadow-sm border rounded-4 stats-card">
+
+            <div class="card-body text-center">
+
+                <h6 class="text-white">
+    Reports Generated
+</h6>
+
+<h3 class="text-white">
+    10+
+</h3>
+
+            </div>
+
         </div>
 
     </div>
 
 </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<style>
+.stats-card{
+    background: linear-gradient(135deg,#2563EB,#1D4ED8);
+    color: white !important;
+    border: none !important;
+    transition: 0.3s;
+}
+
+.stats-card h6,
+.stats-card h3{
+    color: white !important;
+}
+
+.stats-card:hover{
+    transform: translateY(-5px);
+}
+</style>
 
 {% endblock %}

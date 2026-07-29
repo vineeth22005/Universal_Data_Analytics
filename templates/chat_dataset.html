@@ -1,0 +1,81 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Universal AI Assistant
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <div class="card shadow">
+
+        <div class="card-header bg-primary text-white">
+
+            <h2>🤖 Universal AI Assistant</h2>
+
+<p class="mt-2 mb-0">
+    Coding • Resume • Career • Dataset Analysis • AI Assistance
+</p>
+
+        </div>
+
+        <div class="card-body">
+
+            <form method="POST">
+
+                <div class="input-group">
+
+                    <input
+                        type="text"
+                        name="question"
+                        class="form-control"
+                        placeholder="Ask anything..."
+                        required>
+
+                    <button
+                        class="btn btn-primary">
+
+                        Send
+
+                    </button>
+
+                </div>
+
+            </form>
+
+            {% if question %}
+
+            <div class="mt-4">
+
+                <div class="bg-primary text-white p-3 rounded mb-3">
+
+                    <b>👤 You</b>
+
+                    <br><br>
+
+                    {{ question }}
+
+                </div>
+
+                <div class="bg-success text-white p-3 rounded">
+
+                    <b>🤖 Universal AI</b>
+
+                    <br><br>
+
+                    {{ answer }}
+
+                </div>
+
+            </div>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

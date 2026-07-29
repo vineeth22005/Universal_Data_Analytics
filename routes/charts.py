@@ -1,9 +1,69 @@
 from flask import Blueprint, render_template, request, session, redirect, url_for
 import pandas as pd
 import plotly.express as px
-from utils.chart_recommender import recommend_chart
 from utils.ai_insights import generate_ai_insights
 from utils.ai_recommendations import generate_recommendations
+
+def apply_dark_theme(fig):
+
+    fig.update_layout(
+        template="plotly_dark",
+        paper_bgcolor="#0B1220",
+        plot_bgcolor="#0B1220",
+
+        xaxis_showline=True,
+        yaxis_showline=True,
+        font_color="white",
+
+        font=dict(
+            color="white",
+            size=18
+        ),
+        xaxis_tickfont=dict(color="white"),
+        yaxis_tickfont=dict(color="white"),
+        xaxis=dict(color="white"),
+        yaxis=dict(color="white"),
+        title_font_color="white",
+        legend_font_color="white",
+        hoverlabel=dict(
+            bgcolor="#0B1220",
+            font_color="white"
+        )
+    )
+    fig.update_xaxes(
+        tickfont=dict(
+            color="#FFFFFF",
+            size=18
+        ),
+
+        title_font=dict(
+            color="#FFFFFF",
+            size=16
+        ),
+        showgrid=False,
+        tickangle=-30
+    )
+
+    fig.update_yaxes(
+        tickfont=dict(
+            color="#FFFFFF",
+            size=18
+        ),
+
+        title_font=dict(
+            color="#FFFFFF",
+            size=16
+        ),
+        showgrid=True,
+        gridcolor="#1E293B"
+    )
+
+    fig.update_traces(
+        textfont_color="white"
+    )
+
+
+    return fig
 
 charts_bp = Blueprint("charts", __name__)
 
@@ -21,219 +81,129 @@ def charts():
     else:
         df = pd.read_excel(filepath)
 
-    columns = df.columns.tolist()
-    insights = generate_ai_insights(df)
-    recommendations = generate_recommendations(df)
+    ignore_words = [
+        "id",
+        "code",
+        "number",
+        "no"
+    ]
 
-    recommendation = recommend_chart(df)
+    columns = [
+        col for col in df.columns
+        if not any(
+            word in col.lower()
+            for word in ignore_words
+        )
+    ]
 
-    auto_chart = recommendation.get("chart")
-    auto_x = recommendation.get("x")
-    auto_y = recommendation.get("y")
-
-    charts = []
-    chart_html = None
-    ai_chart_html = None
-
-    manual_chart_html = None
-
-    try:
-
-        if auto_chart == "bar":
-            fig = px.bar(df, x=auto_x, y=auto_y)
-
-        elif auto_chart == "line":
-            fig = px.line(df, x=auto_x, y=auto_y)
-
-        elif auto_chart == "scatter":
-            fig = px.scatter(df, x=auto_x, y=auto_y)
-
-        elif auto_chart == "histogram":
-            fig = px.histogram(df, x=auto_x)
-
-        elif auto_chart == "pie":
-            fig = px.pie(df, names=auto_x)
-
-        else:
-            fig = None
-
-        if fig:
-            chart_html = fig.to_html(full_html=False)
-
-    except Exception:
-        pass
-
-    numeric_cols = df.select_dtypes(include="number").columns.tolist()
-
-    categorical_cols = df.select_dtypes(
-        include=["object", "category"]
+    numeric_columns = df.select_dtypes(
+        include="number"
     ).columns.tolist()
 
-    try:
-
-        # Bar Chart
-
-        if len(categorical_cols) > 0 and len(numeric_cols) > 0:
-            bar_df = (
-                df.groupby(categorical_cols[0])[numeric_cols[0]]
-                .sum()
-                .reset_index()
-                .sort_values(numeric_cols[0], ascending=False)
-                .head(10)
-            )
-
-            fig = px.bar(
-                bar_df,
-                x=categorical_cols[0],
-                y=numeric_cols[0],
-                title="Top 10 " + categorical_cols[0]
-            )
-
-            charts.append(fig.to_html(full_html=False))
-
-        # Pie Chart
-
-        if len(categorical_cols) > 0:
-            pie_df = (
-                df[categorical_cols[0]]
-                .value_counts()
-                .head(10)
-                .reset_index()
-            )
-
-            pie_df.columns = [categorical_cols[0], "Count"]
-
-            fig = px.pie(
-                pie_df,
-                names=categorical_cols[0],
-                values="Count",
-                title="Top 10 " + categorical_cols[0]
-            )
-
-            charts.append(fig.to_html(full_html=False))
-
-        # Histogram
-
-        if len(numeric_cols) > 0:
-            fig = px.histogram(
-                df,
-                x=numeric_cols[0],
-                nbins=30,
-                title=numeric_cols[0] + " Distribution"
-            )
-
-            charts.append(fig.to_html(full_html=False))
-
-        # Box Plot
-
-        if len(numeric_cols) > 0:
-            fig = px.box(
-                df,
-                y=numeric_cols[0],
-                title=numeric_cols[0] + " Box Plot"
-            )
-
-            charts.append(fig.to_html(full_html=False))
-
-    except Exception as e:
-
-        print(e)
+    insights = generate_ai_insights(df)
+    recommendations = generate_recommendations(df)
+    chart_html = None
 
     if request.method == "POST":
 
-        mode = request.form.get("mode")
+        chart_type = request.form.get("chart_type")
+        x = request.form.get("manual_x")
+        y = request.form.get("manual_y")
 
-        if mode == "manual":
+        if chart_type in ["bar", "line", "scatter", "box"] and not y:
+            chart_html = """
+            <div class='alert alert-warning'>
+                Please select a Y Column.
+            </div>
+            """
 
-            chart_type = request.form.get("chart_type")
-            x = request.form.get("manual_x")
-            y = request.form.get("manual_y")
-
-        else:
-
-            x = request.form.get("x_column")
-            y = request.form.get("y_column")
+            return render_template(
+                "charts.html",
+                columns=columns,
+                numeric_columns=numeric_columns,
+                chart=chart_html,
+                insights=insights,
+                recommendations=recommendations
+            )
 
         try:
 
-            x_is_numeric = pd.api.types.is_numeric_dtype(df[x])
+            if chart_type == "bar":
 
-            y_is_numeric = False
+                print(chart_type)
 
-            if y:
-                y_is_numeric = pd.api.types.is_numeric_dtype(df[y])
+                fig = px.bar(
+                    df,
+                    x=x,
+                    y=y
+                )
 
-            # ==========================
-            # MANUAL CHART MODE
-            # ==========================
 
-            if mode == "manual":
 
-                if chart_type == "bar":
-                    fig = px.bar(df, x=x, y=y)
+            elif chart_type == "line":
 
-                elif chart_type == "line":
-                    fig = px.line(df, x=x, y=y)
+                df_grouped = (
+                    df.groupby(x)[y]
+                    .mean()
+                    .reset_index()
+                )
 
-                elif chart_type == "scatter":
-                    fig = px.scatter(df, x=x, y=y)
+                fig = px.line(
+                    df_grouped,
+                    x=x,
+                    y=y,
+                    color_discrete_sequence=["#00FF7F"]
+                )
 
-                elif chart_type == "pie":
-                    fig = px.pie(df, names=x)
+            elif chart_type == "scatter":
+                fig = px.scatter(
+                    df,
+                    x=x,
+                    y=y,
+                    color_discrete_sequence=["#FFD700"]
+                )
 
-                elif chart_type == "histogram":
-                    fig = px.histogram(df, x=x)
+            elif chart_type == "pie":
+                fig = px.pie(
+                    df,
+                    names=x,
+                    color_discrete_sequence=px.colors.qualitative.Set3
+                )
 
-                elif chart_type == "box":
-                    fig = px.box(df, y=y)
+            elif chart_type == "histogram":
+                fig = px.histogram(
+                    df,
+                    x=x,
+                    color_discrete_sequence=["#636EFA"]
+                )
 
-                else:
-                    fig = px.bar(df, x=x, y=y)
 
-            # ==========================
-            # AI SMART CHART MODE
-            # ==========================
 
             else:
+                fig = px.bar(df, x=x, y=y)
 
-                if y and (not x_is_numeric) and y_is_numeric:
+            fig = apply_dark_theme(fig)
 
-                    fig = px.bar(df, x=x, y=y)
-
-                elif y and x_is_numeric and y_is_numeric:
-
-                    fig = px.scatter(df, x=x, y=y)
-
-                elif y and pd.api.types.is_datetime64_any_dtype(df[x]):
-
-                    fig = px.line(df, x=x, y=y)
-
-                elif not y and (not x_is_numeric):
-
-                    fig = px.pie(df, names=x)
-
-                elif not y and x_is_numeric:
-
-                    fig = px.histogram(df, x=x)
-
-                else:
-
-                    fig = px.bar(df, x=x, y=y)
+            if chart_type in ["bar", "histogram"]:
+                fig.update_traces(
+                    marker_color="#636EFA"
+                )
 
             chart_html = fig.to_html(full_html=False)
 
         except Exception as e:
 
-            chart_html = f"<div class='alert alert-danger'>{e}</div>"
+            chart_html = (
+                f"<div class='alert alert-danger'>{e}</div>"
+            )
 
     return render_template(
         "charts.html",
         columns=columns,
-        charts=charts,
+        numeric_columns=numeric_columns,
         chart=chart_html,
-        auto_chart=auto_chart,
-        auto_x=auto_x,
-        auto_y=auto_y,
         insights=insights,
-        recommendations=recommendations
+        recommendations=recommendations,
+        selected_x=x if 'x' in locals() else "",
+        selected_y=y if 'y' in locals() else ""
     )

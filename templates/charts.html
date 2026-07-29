@@ -8,23 +8,6 @@ Interactive Charts
 
 <div class="container">
 
-    <div class="d-flex justify-content-end mb-3">
-
-        <a href="{{ url_for('report.download_report') }}"
-   class="btn btn-danger">
-
-    📄 Download PDF Report
-
-</a>
-
-    <a href="{{ url_for('ai_dashboard.ai_dashboard') }}"
-       class="btn btn-success">
-
-        🤖 Generate AI Dashboard
-
-    </a>
-
-</div>
 
     <!-- ================= AI INSIGHTS ================= -->
 
@@ -32,7 +15,7 @@ Interactive Charts
 
     <div class="card-header bg-info text-white">
 
-        <h3>🤖 AI Dataset Insights</h3>
+        <h3>🤖 AI Insights & Recommendations</h3>
 
     </div>
 
@@ -56,108 +39,6 @@ Interactive Charts
 
 </div>
 
-    <!-- ================= AI BUSINESS RECOMMENDATIONS ================= -->
-
-<div class="card shadow mt-4">
-
-    <div class="card-header bg-success text-white">
-
-        <h3>💡 AI Business Recommendations</h3>
-
-    </div>
-
-    <div class="card-body">
-
-        <ul class="list-group">
-
-            {% for item in recommendations %}
-
-            <li class="list-group-item">
-
-                {{ item }}
-
-            </li>
-
-            {% endfor %}
-
-        </ul>
-
-    </div>
-
-</div>
-
-    <!-- ================= AI SMART CHART ================= -->
-
-<div class="card shadow mb-4">
-
-    <div class="card-header bg-primary text-white">
-
-        <h3>🤖 AI Smart Chart Generator</h3>
-
-        <small>
-            Select X & Y columns. AI automatically chooses the best chart.
-        </small>
-
-    </div>
-
-    <div class="card-body">
-
-        <div class="card-header bg-warning">
-            <h3>📈 Interactive Chart Builder</h3>
-        </div>
-
-        <div class="card-body">
-
-<div class="tab-content">
-
-    <div class="tab-pane fade show active"
-     id="smartChart">
-
-            <form method="POST">
-
-                <div class="row">
-
-                    <div class="col-md-4">
-
-                        <label>X Column</label>
-
-                        <select class="form-select" name="x_column">
-
-                            {% for col in columns %}
-                            <option value="{{ col }}">{{ col }}</option>
-                            {% endfor %}
-
-                        </select>
-
-                    </div>
-
-                    <div class="col-md-4">
-
-                        <label>Y Column</label>
-
-                        <select class="form-select" name="y_column">
-
-                            {% for col in columns %}
-                            <option value="{{ col }}">{{ col }}</option>
-                            {% endfor %}
-
-                        </select>
-
-                    </div>
-
-                </div>
-
-                <br>
-
-                <button class="btn btn-primary">
-                    Generate Chart
-                </button>
-
-            </form>
-
-        </div>
-
-            <hr>
 
     <!-- ================= MANUAL CHART BUILDER ================= -->
 
@@ -165,13 +46,13 @@ Interactive Charts
 
     <div class="card-header bg-success text-white">
 
-        <h3>🛠 Manual Chart Builder</h3>
+    <h3>📊 Chart Builder</h3>
 
-        <small>
-            Select the chart type manually and generate your visualization.
-        </small>
+    <small>
+        Select chart type and generate your visualization.
+    </small>
 
-    </div>
+</div>
 
     <div class="card-body">
 
@@ -192,7 +73,6 @@ Interactive Charts
                         <option value="scatter">Scatter Plot</option>
                         <option value="pie">Pie Chart</option>
                         <option value="histogram">Histogram</option>
-                        <option value="box">Box Plot</option>
 
                     </select>
 
@@ -204,13 +84,19 @@ Interactive Charts
 
                     <select class="form-select" name="manual_x">
 
-                        {% for col in columns %}
+    <option value="">
+        -- Select X Column --
+    </option>
 
-                        <option value="{{ col }}">{{ col }}</option>
+    {% for col in columns %}
 
-                        {% endfor %}
+    <option value="{{ col }}">
+        {{ col }}
+    </option>
 
-                    </select>
+    {% endfor %}
+
+</select>
 
                 </div>
 
@@ -218,15 +104,21 @@ Interactive Charts
 
                     <label class="form-label">Y Column</label>
 
-                    <select class="form-select" name="manual_y">
+                   <select class="form-select" name="manual_y">
 
-                        {% for col in columns %}
+<option value="">
+        -- Select Y Column --
+    </option>
 
-                        <option value="{{ col }}">{{ col }}</option>
+    {% for col in numeric_columns %}
 
-                        {% endfor %}
+    <option value="{{ col }}">
+        {{ col }}
+    </option>
 
-                    </select>
+    {% endfor %}
+
+</select>
 
                 </div>
 
@@ -242,61 +134,25 @@ Interactive Charts
 
         </form>
 
-    </div>
-
-</div>
-
-<!-- Smart Chart -->
-
-{% if chart %}
-
-<div class="card shadow mb-4">
-
-    <div class="card-header bg-primary text-white">
-
-        <h4>📊 Smart Generated Chart</h4>
-
-    </div>
-
-    <div class="card-body">
-
-        {{ chart|safe }}
-
-    </div>
-
-</div>
-
-{% endif %}
-
-<!-- AI Dashboard -->
-
-{% if charts %}
+        {% if chart %}
 
 <div class="card mt-4">
 
-    <div class="card-header bg-dark text-white">
-
-        <h4>🤖 AI Generated Dashboard</h4>
-
+    <div class="card-header bg-primary text-white">
+        <h4>📊 Generated Chart</h4>
     </div>
 
-    <div class="card-body">
-
-        {% for item in charts %}
-
-            <div class="mb-5">
-
-                {{ item|safe }}
-
-            </div>
-
-        {% endfor %}
-
-    </div>
+    <div class="card-body" style="overflow-x:auto;">
+    {{ chart|safe }}
+</div>
 
 </div>
 
 {% endif %}
+
+    </div>
+
+</div>
 
                 </div>
 
@@ -305,9 +161,6 @@ Interactive Charts
 </div>
 
 </div>
-
-
-
 
     {% endblock %}
 

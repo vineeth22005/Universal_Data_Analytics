@@ -18,36 +18,35 @@
 href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     
 </head>
+
 <body>
 
     <!-- Navigation Bar -->
-   <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
-
-    <div class="container-fluid px-4">
+  <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top px-4">
+    <div class="container-fluid">
 
         <a class="navbar-brand d-flex align-items-center fw-bold text-primary"
    href="{{ url_for('dashboard.dashboard') }}">
 
     <img
     src="{{ url_for('static', filename='images/logo.png') }}"
-    width="90"
-    height="90"
-    class="me-2">
+    style="width:50px !important; height:50px !important;"
+    class="me-3">
 
-    <span>
+    <span style="font-size:36px !important; font-weight:700;">
         Universal Data Analytics
     </span>
 
 </a>
 
         <button class="navbar-toggler"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#navbarNav">
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarNav">
 
-            <span class="navbar-toggler-icon"></span>
+    <span class="navbar-toggler-icon"></span>
 
-        </button>
+</button>
 
         <div class="collapse navbar-collapse"
              id="navbarNav">
@@ -97,20 +96,33 @@ href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.m
 
                 <li class="nav-item">
 
-    <a class="nav-link {% if request.endpoint == 'chat.chat' %}active{% endif %}"
+   <a class="nav-link {% if request.endpoint == 'chat.chat' %}active{% endif %}"
    href="{{ url_for('chat.chat') }}">
 
-    {% if request.endpoint == 'chat.chat' %}
-        <i class="bi bi-check-circle-fill text-success"></i>
-    {% endif %}
-
-    AI Chat
+     Dataset Analyst
 
 </a>
 
+                    <li class="nav-item">
+
+    <a class="nav-link"
+       href="{{ url_for('chat_dataset.chat_dataset') }}">
+
+         Universal AI Assistant
+
+    </a>
+
 </li>
 
+</li>
 
+<li class="nav-item ms-2">
+    <button
+    id="darkModeToggle"
+    class="btn">
+     Dark Mode
+</button>
+</li>
 
                 <li class="nav-item">
 
@@ -197,14 +209,240 @@ href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.m
 
 <script>
 
+const toggleButton =
+document.getElementById(
+    "darkModeToggle"
+);
 
+      function updateCharts() {
+
+    let darkMode =
+        document.body.classList.contains("dark-mode");
+
+    let plots =
+        document.getElementsByClassName("plotly-graph-div");
+
+    for (let i = 0; i < plots.length; i++) {
+
+        Plotly.relayout(plots[i], {
+
+            template: darkMode ? "plotly_dark" : "plotly_white",
+
+            paper_bgcolor:
+                darkMode ? "#0B1220" : "#FFFFFF",
+
+            plot_bgcolor:
+                darkMode ? "#0B1220" : "#FFFFFF",
+
+            font: {
+                color:
+                    darkMode ? "#FFFFFF" : "#000000"
+            },
+
+           xaxis: {
+    tickfont: {
+        color: darkMode ? "#FFFFFF" : "#000000",
+        size: 18
+    },
+    title: {
+        font: {
+            color: darkMode ? "#FFFFFF" : "#000000",
+            size: 18
+        }
+    }
+},
+
+yaxis: {
+    tickfont: {
+        color: darkMode ? "#FFFFFF" : "#000000",
+        size: 18
+    },
+    title: {
+        font: {
+            color: darkMode ? "#FFFFFF" : "#000000",
+            size: 18
+        }
+    }
+},
+
+            hoverlabel: {
+                bgcolor:
+                    darkMode ? "#0B1220" : "#FFFFFF",
+
+                font: {
+                    color:
+                        darkMode ? "#FFFFFF" : "#000000"
+                }
+            }
+        });
+    }
 }
+
+
+toggleButton.addEventListener(
+    "click",
+    function(){
+
+        document.body.classList.toggle(
+            "dark-mode"
+        );
+
+               updateCharts();
+
+        if(
+            document.body.classList.contains(
+                "dark-mode"
+            )
+        ){
+            localStorage.setItem(
+                "theme",
+                "dark"
+            );
+
+            sessionStorage.setItem(
+    "dark_mode",
+    document.body.classList.contains("dark-mode")
+);
+        }
+        else{
+            localStorage.setItem(
+                "theme",
+                "light"
+            );
+        }
+    }
+);
+
+        fetch("/set-theme", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+        theme: document.body.classList.contains("dark-mode")
+            ? "dark"
+            : "light"
+    })
+});
+
+        window.addEventListener(
+    "load",
+    function(){
+
+        if(
+            localStorage.getItem(
+                "theme"
+            ) === "dark"
+        ){
+
+            document.body.classList.add(
+                "dark-mode"
+            );
+
+            updateCharts();
+        }
+    }
+);
 
 </script>
 
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
 
+<script>
+
+function animate(id, end, suffix){
+
+    let count = 0;
+
+    let speed = end / 100;
+
+    let interval = setInterval(function(){
+
+        count += speed;
+
+        if(count >= end){
+
+            count = end;
+
+            clearInterval(interval);
+
+        }
+
+        document
+        .getElementById(id)
+        .innerHTML =
+        Math.floor(count) + suffix;
+
+    },20);
+
+}
+
+window.addEventListener(
+    "load",
+    function(){
+
+        animate(
+            "counter1",
+            10,
+            "K+"
+        );
+
+        animate(
+            "counter2",
+            500,
+            "+"
+        );
+
+        animate(
+            "counter3",
+            99,
+            "%"
+        );
+
+    }
+);
+
+</script>
+
+<script>
+
+const text =
+"Analyze • Predict • Visualize • Automate using AI and Machine Learning.";
+
+let i = 0;
+
+function typeEffect(){
+
+    if(
+        document.getElementById(
+            "typing-text"
+        )
+    ){
+
+        if(i < text.length){
+
+            document.getElementById(
+                "typing-text"
+            ).innerHTML += text.charAt(i);
+
+            i++;
+
+            setTimeout(
+                typeEffect,
+                50
+            );
+        }
+    }
+
+}
+
+window.addEventListener(
+    "load",
+    typeEffect
+);
+
+</script>
 
 </body>
 </html>

@@ -165,9 +165,11 @@ body{
    KPI Cards
 =========================== */
 
-.kpi-card{
+/* White Mode */
 
-    background:#003B7A !important;
+body:not(.dark-mode) .kpi-card{
+
+    background:#0A4A92 !important;
 
     color:white !important;
 
@@ -179,6 +181,22 @@ body{
 
 }
 
+
+/* Dark Mode */
+
+body.dark-mode .kpi-card{
+
+    background:#0A4A92 !important;
+
+    color:white !important;
+
+    border:none !important;
+
+    border-radius:15px;
+
+    height:140px;
+
+}
 
 
 .kpi-card:hover{
@@ -1129,4 +1147,424 @@ p{
 
     font-size:30px;
 
+}
+
+/* Sidebar & Navigation Text */
+
+.sidebar a {
+    color: white !important;
+}
+
+.sidebar a:hover {
+    color: #cccccc !important;
+}
+
+/* Navbar */
+
+.nav-link {
+    color: white !important;
+}
+
+/* Action Cards */
+
+.action-card {
+    color: white !important;
+}
+
+.action-card h5 {
+    color: white !important;
+}
+
+.action-card p {
+    color: white !important;
+}
+
+.nav-link{
+    color: #0A4A92 !important;
+}
+
+.navbar-brand{
+    color: white !important;
+}
+
+.nav-link:hover{
+    color: #60A5FA !important;
+}
+
+/* Navbar Buttons */
+
+.navbar .nav-link{
+    color: #0A4A92 !important;
+}
+
+.navbar .nav-link:hover{
+    color: #60A5FA !important;
+}
+
+/* All Bootstrap Buttons */
+
+.btn-primary{
+    background-color: #0A4A92 !important;
+    border-color: #0A4A92 !important;
+    color: white !important;
+}
+
+.btn-success{
+    background-color: #198754 !important;
+    border-color: #198754 !important;
+    color: white !important;
+}
+
+.btn-danger{
+    background-color: #dc3545 !important;
+    border-color: #dc3545 !important;
+    color: white !important;
+}
+
+.navbar-brand{
+    margin-right: 80px !important;
+}
+
+.navbar-brand img{
+    width:90px !important;
+    height:90px !important;
+}
+
+.navbar-brand span{
+    font-size:36px !important;
+    font-weight:700 !important;
+}
+
+/* ===========================
+   PROFESSIONAL DARK MODE
+=========================== */
+
+.dark-mode{
+    background-color:#111827 !important;
+    color:white !important;
+}
+
+.dark-mode .navbar{
+    background-color:#0F172A !important;
+}
+
+.dark-mode .card{
+    background-color:#1F2937 !important;
+    color:white !important;
+    border:1px solid #374151;
+}
+
+.dark-mode .table{
+    color:white !important;
+}
+
+.dark-mode th,
+.dark-mode td{
+    color:white !important;
+}
+
+.dark-mode p,
+.dark-mode h1,
+.dark-mode h2,
+.dark-mode h3,
+.dark-mode h4,
+.dark-mode h5,
+.dark-mode h6,
+.dark-mode span,
+.dark-mode label{
+    color:white !important;
+}
+
+.dark-mode .text-muted{
+    color:#d1d5db !important;
+}
+
+.dark-mode .nav-link{
+    color:white !important;
+}
+
+.dark-mode .nav-link:hover{
+    color:#60A5FA !important;
+}
+
+.dark-mode .form-control{
+    background-color:#374151 !important;
+    color:white !important;
+    border-color:#4B5563 !important;
+}
+
+.dark-mode .form-select{
+    background-color:#374151 !important;
+    color:white !important;
+}
+
+.dark-mode .btn-outline-primary{
+    color:white !important;
+    border-color:white !important;
+}
+
+/* Dark Mode Tables */
+
+.dark-mode .table{
+    background-color:#1F2937 !important;
+    color:white !important;
+}
+
+.dark-mode .table th{
+    background-color:#111827 !important;
+    color:white !important;
+}
+
+.dark-mode .table td{
+    background-color:#1F2937 !important;
+    color:white !important;
+}
+
+.dark-mode .table-striped tbody tr:nth-of-type(odd) td{
+    background-color:#273449 !important;
+}
+
+.dark-mode .table-striped tbody tr:nth-of-type(even) td{
+    background-color:#1F2937 !important;
+}
+
+.dark-mode .table-hover tbody tr:hover td{
+    background-color:#374151 !important;
+}
+
+/* Analytics Summary Cards */
+
+.dark-mode .analytics-card table,
+.dark-mode .analytics-card td,
+.dark-mode .analytics-card th{
+    background-color:#1F2937 !important;
+    color:white !important;
+    border-color:#374151 !important;
+}
+
+.dark-mode .analytics-card .table-striped tbody tr:nth-child(odd) td{
+    background-color:#273449 !important;
+}
+
+.dark-mode .analytics-card .table-striped tbody tr:nth-child(even) td{
+    background-color:#1F2937 !important;
+}
+
+/* Analytics Summary Dark Mode */
+
+.dark-mode .list-group-item{
+    background-color:#1F2937 !important;
+    color:white !important;
+    border-color:#374151 !important;
+}
+
+.dark-mode .card-header.bg-info{
+    background-color:#0A4A92 !important;
+}
+
+.dark-mode .card{
+    background-color:#111827 !important;
+}
+
+/* Cleaning Summary Dark Mode */
+
+.dark-mode .alert-info,
+.dark-mode .bg-info-subtle{
+    background-color:#1F2937 !important;
+    color:white !important;
+    border:1px solid #374151 !important;
+}
+
+.dark-mode .alert-info h4,
+.dark-mode .alert-info li,
+.dark-mode .alert-info p{
+    color:white !important;
+}
+
+#darkModeToggle{
+    border:none !important;
+    box-shadow:none !important;
+}
+
+#darkModeToggle{
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    color: #0A4A92 !important;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.dark-mode #darkModeToggle{
+    color: white !important;
+}
+
+#darkModeToggle:hover{
+    color: #60A5FA !important;
+}
+
+.dark-mode .navbar-toggler{
+    border: 1px solid white !important;
+}
+
+.dark-mode .navbar-toggler-icon{
+    filter: brightness(0) invert(1);
+}
+
+.summary-text{
+    color:#1F2937;
+    font-weight:500;
+}
+
+.dark-mode .summary-text{
+    color:white !important;
+}
+
+.ai-report{
+    white-space: pre-wrap;
+    font-size:16px;
+    color:#1F2937;
+}
+
+.dark-mode .ai-report{
+    color:white !important;
+}
+
+.dark-mode pre{
+    color: white !important;
+    opacity: 1 !important;
+}
+
+.hero-stats h2{
+    color: #60A5FA;
+    font-size: 48px;
+    font-weight: 700;
+}
+
+.hero-stats p{
+    color: white;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.action-card{
+    background:#0A4A92 !important;
+    border:none !important;
+    border-radius:15px;
+    transition:0.3s;
+}
+
+.action-card:hover{
+    transform:translateY(-10px);
+    box-shadow:0px 10px 25px rgba(0,0,0,0.3);
+}
+
+.action-card h4{
+    color:white !important;
+}
+
+.action-card p{
+    color:white !important;
+}
+
+.col-md-2 h1{
+    font-size:50px;
+}
+
+.col-md-2 h5{
+    color:white;
+    font-weight:600;
+}
+
+.footer-section{
+    background:#111827;
+    border-radius:20px;
+}
+
+.footer-section h4{
+    color:#60A5FA;
+}
+
+.footer-section p{
+    color:white;
+}
+
+.footer-section a{
+    color:#60A5FA;
+    text-decoration:none;
+    font-weight:600;
+}
+
+.footer-section a:hover{
+    color:white;
+}
+
+/* White Mode Footer */
+
+.footer-section h2,
+.footer-section h4,
+.footer-section p{
+    color: #1F2937;
+}
+
+.footer-section a{
+    color: #2563EB;
+}
+
+.footer-section small{
+    color: #4B5563;
+}
+
+body:not(.dark-mode) .footer-section{
+    background: #F8FAFC !important;
+}
+
+.hero-img img{
+    filter: drop-shadow(
+        0px 0px 30px #2563EB
+    );
+}
+
+.hero-img img{
+    animation:
+    float 4s ease-in-out infinite;
+}
+
+@keyframes float{
+
+    0%{
+        transform:
+        translateY(0px);
+    }
+
+    50%{
+        transform:
+        translateY(-15px);
+    }
+
+    100%{
+        transform:
+        translateY(0px);
+    }
+
+}
+
+#typing-text{
+    color:white;
+    font-size:24px;
+    font-weight:500;
+}
+
+/* Profile Stats Cards */
+
+.stats-card{
+    background:#2563EB !important;
+    border:1px solid #2563EB !important;
+    color:white !important;
+    border-radius:15px;
+}
+
+.stats-card h3,
+.stats-card h6{
+    color:white !important;
 }

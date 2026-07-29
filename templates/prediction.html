@@ -70,9 +70,11 @@ AI Prediction
 
             {% if accuracy %}
 
-<div class="alert alert-success mt-4">
+            <div class="card shadow mt-4">
 
-    <h4>🎉 Model Trained Successfully!</h4>
+    <h4 class="text-success">
+    🎉 Model Trained Successfully!
+</h4>
 
     <p>
         Target Column:
@@ -80,9 +82,13 @@ AI Prediction
     </p>
 
     <p>
-        Accuracy:
-        <strong>{{ accuracy }}%</strong>
-    </p>
+    Accuracy:
+    <span class="badge bg-success">
+        {{ accuracy }}%
+    </span>
+</p>
+
+                </div>
 
 </div>
 
@@ -159,5 +165,40 @@ AI Prediction
 </div>
 
 </div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const darkMode =
+        document.body.classList.contains("dark-mode");
+
+    let plots = document.getElementsByClassName("plotly-graph-div");
+
+    for (let i = 0; i < plots.length; i++) {
+
+        Plotly.relayout(plots[i], {
+
+            paper_bgcolor: darkMode ? "#0B1220" : "#FFFFFF",
+            plot_bgcolor: darkMode ? "#0B1220" : "#FFFFFF",
+
+            font: {
+                color: darkMode ? "white" : "black"
+            },
+
+            xaxis: {
+                tickfont: {
+                    color: darkMode ? "white" : "black"
+                }
+            },
+
+            yaxis: {
+                tickfont: {
+                    color: darkMode ? "white" : "black"
+                }
+            }
+        });
+    }
+});
+</script>
 
 {% endblock %}

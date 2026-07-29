@@ -31,6 +31,7 @@ def dashboard():
     if "uploaded_file" in session:
 
         filepath = session["uploaded_file"]
+        print(filepath)
 
         try:
 
@@ -39,12 +40,28 @@ def dashboard():
             else:
                 df = pd.read_excel(filepath)
 
+            print("DATAFRAME:")
+            print(df.head())
+
+            print("SHAPE:")
+            print(df.shape)
+
             total_rows = df.shape[0]
             total_columns = df.shape[1]
             missing_values = int(df.isnull().sum().sum())
             duplicate_rows = int(df.duplicated().sum())
 
             numeric_df = df.select_dtypes(include="number")
+
+            ignore_words = ["id", "code", "number", "no"]
+
+            numeric_cols = [
+                col for col in numeric_df.columns
+                if not any(word in col.lower() for word in ignore_words)
+            ]
+
+            numeric_df = numeric_df[numeric_cols]
+
             total_numeric_columns = len(numeric_df.columns)
 
             if not numeric_df.empty:
@@ -107,7 +124,11 @@ def dashboard():
         unique_values=unique_values,
         memory_usage=memory_usage,
         search=search,
-        upload_history=session.get("upload_history", [])
+        upload_history=session.get("upload_history", []),
+        uploaded_filename=session.get(
+            "uploaded_filename",
+            "No File Uploaded"
+        )
     )
 
 @dashboard_bp.route("/upload", methods=["GET", "POST"])
@@ -131,6 +152,7 @@ def upload():
 
             # Save in Session
             session["uploaded_file"] = file_path
+            session["uploaded_filename"] = file.filename
 
             flash(
                 "Dataset uploaded successfully!",

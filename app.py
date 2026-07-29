@@ -22,6 +22,7 @@ from routes.prediction import prediction_bp
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import r2_score
+from routes.chat_with_dataset import chat_dataset_bp
 
 app = Flask(__name__)
 
@@ -48,6 +49,7 @@ app.register_blueprint(profile_bp)
 app.register_blueprint(ai_dashboard_bp)
 app.register_blueprint(chat_bp)
 app.register_blueprint(prediction_bp)
+app.register_blueprint(chat_dataset_bp)
 
 # Create database tables
 with app.app_context():

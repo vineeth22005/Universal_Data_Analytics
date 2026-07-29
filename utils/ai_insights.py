@@ -20,7 +20,13 @@ def generate_ai_insights(df):
     insights.append(f"📑 Duplicate Rows : {duplicate}")
 
     # Numeric columns
-    ignore_words = ["id", "code", "number", "no"]
+    ignore_words = [
+        "id",
+        "code",
+        "number",
+        "no",
+        "index"
+    ]
 
     numeric = [
         col for col in df.select_dtypes(include="number").columns
@@ -39,8 +45,14 @@ def generate_ai_insights(df):
 
     # Categorical columns
     categorical = [
-        col for col in df.select_dtypes(include=["object", "category"]).columns
-        if "date" not in col.lower()
+        col
+        for col in df.select_dtypes(
+            include=["object", "category"]
+        ).columns
+        if (
+                "date" not in col.lower()
+                and "id" not in col.lower()
+        )
     ]
 
     if len(categorical) > 0:
@@ -52,8 +64,22 @@ def generate_ai_insights(df):
         insights.append(f"🏆 Most Frequent {col} : {top}")
 
     # AI Recommendation
-    insights.append(
-        "💡 AI Recommendation : Clean missing values and analyze top performing categories."
-    )
+    if missing > 0:
+
+        insights.append(
+            "💡 Recommendation : Fill missing values before analysis."
+        )
+
+    elif duplicate > 0:
+
+        insights.append(
+            "💡 Recommendation : Remove duplicate records."
+        )
+
+    else:
+
+        insights.append(
+            "💡 Recommendation : Dataset is clean and ready for advanced analytics."
+        )
 
     return insights

@@ -46,36 +46,6 @@ Dashboard
 
 </div>
 
-    <div class="card mb-4 mt-4">
-
-    <div class="card-body">
-
-        <form method="GET" action="{{ url_for('dashboard.dashboard') }}">
-
-            <div class="input-group">
-
-                <span class="input-group-text">
-                    <i class="bi bi-search"></i>
-                </span>
-
-                <input
-                    type="text"
-                    class="form-control"
-                    name="search"
-                    placeholder="Search anything in dataset..."
-                    value="{{ search }}">
-
-                <button class="btn btn-primary" type="submit">
-                    Search
-                </button>
-
-            </div>
-
-        </form>
-
-    </div>
-
-</div>
 
 
         </div>
@@ -153,12 +123,12 @@ Dashboard
 
             <tr>
                 <th>📊 Total Rows</th>
-                <td>{{ session.get("rows", 0) }}</td>
+                <td>{{ rows }}</td>
             </tr>
 
             <tr>
                 <th>📋 Total Columns</th>
-                <td>{{ session.get("columns", 0) }}</td>
+                <td>{{ columns_count }}</td>
             </tr>
 
             <tr>
@@ -231,6 +201,10 @@ Dashboard
                     <li class="list-group-item">
                         🤖 AI Insights (API Quota Required)
                     </li>
+
+                    <li class="list-group-item">
+    🔮 Machine Learning Prediction Available
+</li>
 
                 </ul>
 
@@ -357,11 +331,18 @@ Dashboard
 
         {% if preview_data %}
 
-        <div class="table-responsive">
+        <div class="table-responsive"
+          style="max-height:400px; overflow-y:auto; overflow-x:auto;">
 
             <table class="table table-hover align-middle">
 
-                <thead>
+                <thead style="
+                 position: sticky;
+                 top: 0;
+                 background: #0A4A92;
+                 color: white;
+                 z-index: 10;
+                 ">
 
                     <tr>
 
@@ -524,57 +505,6 @@ Dashboard
 
 </div>
 
-    <!-- Data Profiling -->
-
-<div class="card shadow mt-4">
-
-    <div class="card-header bg-info text-white">
-
-        <h4>📋 Data Profiling</h4>
-
-    </div>
-
-    <div class="card-body">
-
-        <div class="row">
-
-            <div class="col-md-4">
-
-                <div class="alert alert-primary">
-
-                    <strong>💾 Dataset Size</strong><br>
-
-                    {{ dataset_size }}
-
-                </div>
-
-            </div>
-
-            <div class="col-md-4">
-
-                <div class="alert alert-success">
-
-                    <strong>🧮 Numeric Columns</strong><br>
-
-                    {{ total_numeric_columns }}
-
-                </div>
-
-            </div>
-
-            <div class="col-md-4">
-
-                <div class="alert alert-warning">
-
-                    <strong>🧠 Memory Usage</strong><br>
-
-                    {{ memory_usage }} KB
-
-                </div>
-
-            </div>
-
-        </div>
 
         <hr>
 
@@ -632,9 +562,11 @@ Dashboard
 
 </div>
 
+<!-- Upload History Section Disabled -->
+
     <!-- Upload History -->
 
-<div class="card shadow mt-4">
+<div class="card shadow mt-4" style="display:none;">
 
     <div class="card-header bg-success text-white">
 
@@ -693,31 +625,6 @@ Dashboard
         {% endif %}
 
     </div>
-
-</div>
-
-    <!-- Dashboard Statistics -->
-
-<div class="card shadow mt-4">
-
-    <div class="card-header bg-dark text-white">
-
-        <h4>📊 Dataset Statistics Chart</h4>
-
-    </div>
-
-    <div class="card-body text-center">
-
-    <canvas
-        id="statsChart"
-        style="
-            max-width:700px;
-            max-height:300px;
-            margin:auto;
-        ">
-    </canvas>
-
-</div>
 
 </div>
 
@@ -797,7 +704,7 @@ Dashboard
 
     <!-- Recent Upload -->
 
-    <div class="card shadow mt-4">
+    <div class="card shadow mt-4" style="display:none;">
 
         <div class="card-header bg-secondary text-white">
 
@@ -810,28 +717,28 @@ Dashboard
             <table class="table table-bordered">
 
                 <tr>
-                    <th>File Name</th>
-                    <td>{{ session.get("uploaded_filename", "No File Uploaded") }}</td>
-                </tr>
+        <th>File Name</th>
+        <td>{{ uploaded_filename }}</td>
+    </tr>
 
                 <tr>
                     <th>Total Rows</th>
-                    <td>{{ session.get("rows", 0) }}</td>
+                    <td>{{ total_rows }}</td>
                 </tr>
 
                 <tr>
                     <th>Total Columns</th>
-                    <td>{{ session.get("columns", 0) }}</td>
+                    <td>{{ total_columns }}</td>
                 </tr>
 
                 <tr>
                     <th>Missing Values</th>
-                    <td>{{ session.get("missing", 0) }}</td>
+                    <td>{{ missing }}</td>
                 </tr>
 
                 <tr>
                     <th>Duplicate Rows</th>
-                    <td>{{ session.get("duplicates", 0) }}</td>
+                    <td>{{ duplicate_rows }}</td>
                 </tr>
 
             </table>

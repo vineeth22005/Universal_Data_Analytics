@@ -17,6 +17,26 @@ def recommend_chart(df):
         if not any(word in c.lower() for word in ignore_words)
     ]
 
+    def get_best_numeric_column(cols):
+
+        priority = [
+            "sales",
+            "profit",
+            "revenue",
+            "amount",
+            "price",
+            "quantity"
+        ]
+
+        for word in priority:
+
+            for col in cols:
+
+                if word in col.lower():
+                    return col
+
+        return cols[0] if cols else None
+
     categorical_cols = [
         c for c in categorical_cols
         if not any(word in c.lower() for word in ignore_words)
@@ -25,34 +45,31 @@ def recommend_chart(df):
     # Date column detect
     date_cols = []
 
+    date_cols = []
+
     for col in df.columns:
 
-        try:
-
-            pd.to_datetime(df[col])
-
+        if (
+                "date" in col.lower()
+                or "time" in col.lower()
+                or "year" in col.lower()
+        ):
             date_cols.append(col)
-
-        except:
-
-            pass
 
     # Date + Numeric
     if len(date_cols) > 0 and len(numeric_cols) > 0:
-
         return {
             "chart": "line",
             "x": date_cols[0],
-            "y": numeric_cols[0]
+            "y": get_best_numeric_column(numeric_cols)
         }
 
     # Category + Numeric
     if len(categorical_cols) > 0 and len(numeric_cols) > 0:
-
         return {
             "chart": "bar",
             "x": categorical_cols[0],
-            "y": numeric_cols[0]
+            "y": get_best_numeric_column(numeric_cols)
         }
 
     # Numeric + Numeric

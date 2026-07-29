@@ -37,33 +37,41 @@ def chat():
 
         elif "highest" in question or "maximum" in question:
 
-            numeric = df.select_dtypes(include="number").columns
+            for col in df.select_dtypes(include="number").columns:
 
-            if len(numeric):
-                col = numeric[0]
-                answer = f"📈 Highest {col}: {df[col].max()}"
+                if col.lower() in question:
+                    answer = f"📈 Highest {col}: {df[col].max()}"
+                    break
+
             else:
-                answer = "No numeric column found."
+                answer = "Please mention a column name."
 
         elif "lowest" in question or "minimum" in question:
 
-            numeric = df.select_dtypes(include="number").columns
+            for col in df.select_dtypes(include="number").columns:
 
-            if len(numeric):
-                col = numeric[0]
-                answer = f"📉 Lowest {col}: {df[col].min()}"
+                if col.lower() in question:
+                    answer = f"📉 Lowest {col}: {df[col].min()}"
+                    break
+
             else:
-                answer = "No numeric column found."
+                answer = "Please mention a column name."
 
         elif "average" in question or "mean" in question:
 
-            numeric = df.select_dtypes(include="number").columns
+            for col in df.select_dtypes(include="number").columns:
 
-            if len(numeric):
-                col = numeric[0]
-                answer = f"📊 Average {col}: {round(df[col].mean(), 2)}"
+                if col.lower() in question:
+                    answer = (
+                        f"📊 Average {col}: "
+                        f"{round(df[col].mean(), 2)}"
+                    )
+                    break
+
             else:
-                answer = "No numeric column found."
+                answer = "Please mention a column name."
+
+
 
         else:
             answer = "🤖 Sorry, I couldn't understand the question."

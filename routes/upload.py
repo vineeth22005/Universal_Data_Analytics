@@ -41,7 +41,7 @@ def upload():
 
             # Save file details in session
             session["uploaded_file"] = filepath
-            session["uploaded_filename"] = filename
+            session["uploaded_filename"] = file.filename
 
             print("UPLOAD SUCCESS")
             print("FILE:", filepath)
@@ -85,6 +85,12 @@ def upload():
             # Dashboard KPI Values
             session["rows"] = rows
             session["columns"] = columns
+            print("SESSION AFTER SAVE =", session)
+            print("ROWS SAVED =", rows)
+            print("SESSION ROWS =", session["rows"])
+
+            session["total_rows"] = rows
+            session["total_columns"] = columns
             session["missing"] = int(df.isnull().sum().sum())
             session["duplicates"] = duplicate_rows
 

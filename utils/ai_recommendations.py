@@ -30,7 +30,10 @@ def generate_recommendations(df):
         )
 
     # Numeric columns
-    numeric_cols = df.select_dtypes(include="number").columns.tolist()
+    numeric_cols = [
+        col for col in df.select_dtypes(include="number").columns
+        if "id" not in col.lower()
+    ]
 
     if numeric_cols:
 
@@ -47,9 +50,12 @@ def generate_recommendations(df):
         )
 
     # Categorical columns
-    categorical_cols = df.select_dtypes(
-        include=["object", "category"]
-    ).columns.tolist()
+    categorical_cols = [
+        col for col in df.select_dtypes(
+            include=["object", "category"]
+        ).columns
+        if "date" not in col.lower()
+    ]
 
     if categorical_cols:
 
@@ -61,8 +67,19 @@ def generate_recommendations(df):
             f"🏆 Most frequent {col}: {top}"
         )
 
-    recommendations.append(
-        "💡 Recommendation: Focus on high-performing categories and monitor low-performing segments."
-    )
+    if missing > 0:
+        recommendations.append(
+            "💡 Recommendation: Perform data cleaning before proceeding with advanced analytics."
+        )
+
+    elif duplicate > 0:
+        recommendations.append(
+            "💡 Recommendation: Remove duplicate records to improve model accuracy."
+        )
+
+    else:
+        recommendations.append(
+            "💡 Recommendation: Dataset is clean and ready for advanced analytics."
+        )
 
     return recommendations

@@ -60,6 +60,13 @@ def prediction():
                 X = df.drop(columns=[target])
                 y = df[target]
 
+                # Handle missing values
+                data = pd.concat([X, y], axis=1)
+                data = data.dropna()
+
+                X = data.drop(columns=[target])
+                y = data[target]
+
                 X_train, X_test, y_train, y_test = train_test_split(
                     X, y, test_size=0.2, random_state=42
                 )
@@ -82,6 +89,29 @@ def prediction():
                     title="Actual vs Predicted Values"
                 )
 
+                def apply_prediction_theme(fig):
+                    fig.update_layout(
+                        template="plotly_dark",
+                        paper_bgcolor="#0B1220",
+                        plot_bgcolor="#0B1220",
+                        font_color="white",
+                        title_font_color="white"
+                    )
+
+                    fig.update_xaxes(
+                        tickfont=dict(color="white"),
+                        title_font=dict(color="white")
+                    )
+
+                    fig.update_yaxes(
+                        tickfont=dict(color="white"),
+                        title_font=dict(color="white"),
+                        gridcolor="#1E293B"
+                    )
+
+                    return fig
+
+                fig = apply_prediction_theme(fig)
                 graph_html = fig.to_html(full_html=False)
 
                 scatter_fig = px.scatter(
@@ -93,7 +123,7 @@ def prediction():
                     },
                     title="Actual vs Predicted Scatter Plot"
                 )
-
+                scatter_fig = apply_prediction_theme(scatter_fig)
                 scatter_html = scatter_fig.to_html(full_html=False)
 
                 hist_fig = px.histogram(
@@ -101,7 +131,10 @@ def prediction():
                     title="Target Column Distribution"
                 )
 
+                hist_fig = apply_prediction_theme(hist_fig)
+
                 histogram_html = hist_fig.to_html(full_html=False)
+
 
                 accuracy = round(
                     r2_score(y_test, predictions) * 100, 2
@@ -116,7 +149,10 @@ def prediction():
                     title="Average Actual vs Predicted Values"
                 )
 
+                bar_fig = apply_prediction_theme(bar_fig)
+
                 bar_html = bar_fig.to_html(full_html=False)
+
 
     return render_template(
         "prediction.html",
