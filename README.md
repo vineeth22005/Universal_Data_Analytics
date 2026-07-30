@@ -1,12 +1,26 @@
 # 🚀 Universal Data Analytics
 
-An AI-Powered Data Analytics Platform built using **Flask, Python, SQLAlchemy, Plotly, and Google Gemini AI**. This application allows users to upload datasets, perform data analysis, generate interactive visualizations, receive AI-powered insights, and export professional reports.
+An AI-Powered Data Analytics Platform built using **Flask, Python, SQLAlchemy, Plotly, and Google Gemini AI**.
+
+This application allows users to upload datasets, perform data analysis, generate interactive visualizations, receive AI-powered insights, and export professional reports.
 
 ---
 
 ## 🌐 Live Demo
 
-🔗 https://universal-data-analytics-2026.onrender.com
+🚧 Deployment in Progress
+
+The application is currently being deployed on Render.
+
+Run Locally:
+
+```bash
+python app.py
+```
+
+Application URL:
+
+http://127.0.0.1:5000
 
 ---
 
@@ -16,7 +30,7 @@ An AI-Powered Data Analytics Platform built using **Flask, Python, SQLAlchemy, P
 
 ---
 
-# ✨ Features
+## ✨ Features
 
 - 🔐 User Authentication (Login & Registration)
 - 📂 CSV & Excel Dataset Upload
@@ -27,6 +41,7 @@ An AI-Powered Data Analytics Platform built using **Flask, Python, SQLAlchemy, P
 - 📋 Automatic Data Summary
 - 🧹 Data Cleaning Module
 - 📉 Interactive Plotly Charts
+- 🔮 Machine Learning Predictions
 - 📤 Export Reports (PDF)
 - 💬 AI Chat Assistant
 - 📊 Dashboard Statistics
@@ -36,39 +51,46 @@ An AI-Powered Data Analytics Platform built using **Flask, Python, SQLAlchemy, P
 
 ---
 
-# 🛠 Tech Stack
+## 🛠 Tech Stack
 
 ### Backend
+
 - Python
 - Flask
 - SQLAlchemy
 
 ### Frontend
+
 - HTML5
 - CSS3
 - Bootstrap 5
 - JavaScript
 
 ### Database
+
 - SQLite
 
 ### Data Analysis
+
 - Pandas
 - NumPy
 - Plotly
+- Matplotlib
+- Seaborn
 
 ### AI
+
 - Google Gemini AI
 
 ### Deployment
+
 - Render
 
 ---
 
+## 📁 Project Structure
 
-# 📁 Project Structure
-
-```
+```text
 Universal_Data_Analytics/
 │
 ├── app.py
@@ -88,7 +110,7 @@ Universal_Data_Analytics/
 
 ---
 
-# ⚙ Installation
+## ⚙ Installation
 
 ### Clone Repository
 
@@ -108,15 +130,15 @@ cd Universal_Data_Analytics
 python -m venv .venv
 ```
 
-### Activate
+### Activate Environment
 
-Windows
+#### Windows
 
 ```bash
 .venv\Scripts\activate
 ```
 
-### Install Requirements
+### Install Dependencies
 
 ```bash
 pip install -r requirements.txt
@@ -130,7 +152,7 @@ python app.py
 
 ---
 
-# 📊 Modules
+## 📊 Modules
 
 - Authentication
 - Dashboard
@@ -139,34 +161,85 @@ python app.py
 - AI Insights
 - Charts
 - AI Dashboard
-- AI Chat
+- AI Chat Assistant
 - Report Generator
-- Export
+- PDF Export
+- User Profile
+- Dark Mode
 
 ---
 
-# 👨‍💻 Developer
+## 📈 Generated Visualizations
 
-**Vineeth Kumar D**
+- Bar Charts
+- Pie Charts
+- Histograms
+- Correlation Heatmaps
+- Interactive Plotly Charts
 
-🎓 M.Sc. Data Science and Business Analysis
+---
 
-📍 Rathinam Global University
+## 📄 Report Features
 
-GitHub:
-https://github.com/vineeth22005
+- Dataset Summary
+- Statistical Analysis
+- Missing Value Analysis
+- AI Insights
+- Chart Embedding
+- PDF Export
 
-LinkedIn:
-https://www.linkedin.com/in/vineethkumar-d
+---
+
+## 👨‍💻 Developer
+
+### Vineeth Kumar D
+
+- 🎓 M.Sc. Data Science and Business Analysis
+- 🏫 Rathinam Global University
+- 📍 Coimbatore, Tamil Nadu
+
+### Connect with Me
+
+- GitHub:
+  - https://github.com/vineeth22005
+
+- LinkedIn:
+  - https://www.linkedin.com/in/vineethkumar-d
+
+---
+
+## 🎯 Future Enhancements
+
+- Cloud Deployment
+- Advanced ML Predictions
+- Real-Time Analytics
+- Multi-User Collaboration
+- API Integration
+- Automated Scheduling
+- Advanced Dashboard Widgets
 
 ---
 
 ## ⭐ Support
 
-If you like this project,
+If you found this project useful:
 
-⭐ Star this repository.
+- ⭐ Star this repository
+- 🍴 Fork this repository
+- 📢 Share it with others
 
-🍴 Fork this repository.
+---
 
-📢 Share it with others.
+## 🙌 Acknowledgements
+
+- Flask
+- Plotly
+- Pandas
+- SQLAlchemy
+- Bootstrap
+- Google Gemini AI
+- Render
+
+---
+
+### Built with ❤️ by Vineeth Kumar D
