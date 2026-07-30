@@ -1568,3 +1568,19 @@ body:not(.dark-mode) .footer-section{
 .stats-card h6{
     color:white !important;
 }
+
+.live-demo-btn{
+    color: #0A4A92 !important;
+    border: 2px solid #0A4A92 !important;
+    background-color: transparent !important;
+}
+
+.live-demo-btn:hover{
+    background-color: #0A4A92 !important;
+    color: white !important;
+}
+
+body.dark-mode .live-demo-btn{
+    color: white !important;
+    border: 2px solid white !important;
+}

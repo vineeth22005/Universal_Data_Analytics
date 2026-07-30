@@ -1,26 +1,24 @@
-def generate_ai_insights(summary_text):
+import os
+from datetime import datetime
 
-    return """
-UNIVERSAL DATA ANALYTICS - AI INSIGHTS
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
 
-1. Dataset Overview:
-- Dataset uploaded successfully.
+from reportlab.lib import colors
+from reportlab.lib.styles import getSampleStyleSheet
+from reportlab.platypus import (
+    SimpleDocTemplate,
+    Paragraph,
+    Spacer,
+    Image,
+    Table,
+    TableStyle,
+    PageBreak
+)
 
-2. Data Quality:
-- Data appears to be processed correctly.
+from services.ai_service import generate_ai_insights
 
-3. Missing Values:
-- Please review the dashboard for missing value analysis.
-
-4. Interesting Patterns:
-- Visualizations were generated successfully.
-
-5. Business Insights:
-- Trends can be identified using charts in the generated report.
-
-6. Recommendations:
-- Continue exploring the dataset for actionable insights.
-"""
 
 
 # ==============================
